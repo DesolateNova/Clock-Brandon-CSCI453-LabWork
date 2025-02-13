@@ -549,6 +549,7 @@ GameObject:
   - component: {fileID: 1246169314}
   - component: {fileID: 1246169313}
   - component: {fileID: 1246169318}
+  - component: {fileID: 1246169319}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -688,6 +689,25 @@ MonoBehaviour:
   speed: 6
   sensitivity: 5
   sprintSpeed: 10
+  jumpForce: 3
+  gravity: 9.81
+--- !u!114 &1246169319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246169312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac66ca83685d8e48812e83d07a3bf2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 330585546}
+  damage: 0
+  range: 5
+  fireRate: 1
+  bulletCount: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
