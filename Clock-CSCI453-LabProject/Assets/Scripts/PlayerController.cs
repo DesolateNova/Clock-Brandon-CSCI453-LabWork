@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float sprintSpeed;
     [SerializeField] float jumpForce;
     [SerializeField] float gravity = 9.81f;
+    [SerializeField] int spareRounds;
+    [SerializeField] Weapon equippedWeapon;
 
     private float moveFB;
     private float moveLR;
@@ -31,6 +33,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
+        if (Input.GetButtonDown("Reload"))
+        {
+            equippedWeapon = getCurrentWeapon();
+            spareRounds = equippedWeapon.Reload(spareRounds);
+        }
+        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            equippedWeapon = getCurrentWeapon();
+            if (equippedWeapon.GetRemainingBullets() > 0)
+                equippedWeapon.Shoot();
+            else
+                spareRounds = equippedWeapon.Reload(spareRounds);
+        }
+        
     }
 
     private void Move()
@@ -77,4 +94,10 @@ public class PlayerController : MonoBehaviour
         cc.Move(movement * Time.deltaTime);
 
     }
+
+    private Weapon getCurrentWeapon()
+    {
+        return equippedWeapon;
+    }
+
 }
