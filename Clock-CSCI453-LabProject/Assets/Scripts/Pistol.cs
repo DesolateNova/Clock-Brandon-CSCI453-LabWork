@@ -12,22 +12,18 @@ public class Pistol : Weapon
     }
     public override void Shoot()
     {
-        Debug.Log("Kerplow");
+        bulletCount--;
+        base.Shoot();
         RaycastHit hit;
         Debug.DrawRay(firePoint.position, firePoint.forward * range, Color.red, 1f);
         if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-            bulletCount--;
         }
     }
-    public override int Reload(int currentAmmo)
+    public override void Reload()
     {
-        Debug.Log("Reloading!");
-        int bulletsNeeded = maxCapacity - bulletCount;
-        bulletCount += bulletsNeeded;
-        return currentAmmo - bulletsNeeded;
-
+        base.Reload();
     }
 
     public override int GetRemainingBullets()

@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private CharacterController cc;
     private Camera playerCam;
 
+    public int SpareRounds { get => spareRounds; set => spareRounds = value; }
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Reload"))
         {
             equippedWeapon = getCurrentWeapon();
-            spareRounds = equippedWeapon.Reload(spareRounds);
+            equippedWeapon.Reload();
         }
         
         if (Input.GetButtonDown("Fire1"))
@@ -45,7 +47,7 @@ public class PlayerController : MonoBehaviour
             if (equippedWeapon.GetRemainingBullets() > 0)
                 equippedWeapon.Shoot();
             else
-                spareRounds = equippedWeapon.Reload(spareRounds);
+                equippedWeapon.Reload();
         }
         
     }
@@ -78,11 +80,21 @@ public class PlayerController : MonoBehaviour
 
         if (cc.isGrounded)
         {
-            movement.y = -2f;
+            if (jumpForce.y < 0)
+            {
+                jumpForce.y = -2f;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("Jump");
+                jumpForce.y = jumpForce;
+            }
         }
-        else
+
+        if (!cc.isGrounded)
         {
-            movement.y -= gravity;
+            jumpForce.y -= gravity * Time.deltaTime;
         }
 
 
